@@ -8,35 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* AI Dark Theme Colors */
+    --background: 220 25% 4%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 25% 6%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 25% 6%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 25% 4%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 25% 8%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 25% 10%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 266 83% 58%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 25% 15%;
+    --input: 220 25% 10%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* AI Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(266 83% 58%));
+    --gradient-dark: linear-gradient(135deg, hsl(220 25% 4%), hsl(220 30% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(220 25% 6% / 0.8), hsl(220 25% 10% / 0.6));
+    
+    /* Glow Effects */
+    --glow-primary: 0 0 40px hsl(217 91% 60% / 0.3);
+    --glow-accent: 0 0 40px hsl(266 83% 58% / 0.3);
+    --glow-subtle: 0 4px 20px hsl(217 91% 60% / 0.1);
+
+    /* Shadows */
+    --shadow-glass: 0 8px 32px hsl(220 25% 4% / 0.4);
+    --shadow-card: 0 4px 20px hsl(220 25% 4% / 0.6);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +118,60 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-dark);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Glow Button */
+  .glow-button {
+    background: var(--gradient-primary);
+    box-shadow: var(--glow-primary);
+    transition: all 0.3s ease;
+  }
+
+  .glow-button:hover {
+    box-shadow: var(--glow-primary), 0 0 60px hsl(217 91% 60% / 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* Neon Text */
+  .neon-text {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  /* Animated Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-flow 3s ease infinite;
+  }
+
+  @keyframes gradient-flow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Floating Animation */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
   }
 }
